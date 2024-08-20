@@ -59,10 +59,59 @@ function Network:SignalAll(name: string, ...: any)
     endpoint:FireAllClients(...)
 end
 
---- @yields
 --- Signals and yields for response
 function Network:SignalAsync(name: string, ...: any)
     return Promise.try(Network.Signal, Network, name, ...)
+end
+
+--- Invokes the server
+--- @error "InvokeClient" -- Invoking the client is not advised or supported with this module
+function Network:Invoke(name: string, ...: any): any
+    local endpoint: Remote = Network:GetEndpoint(name, "RemoteFunction")
+    assert(endpoint, `[Network] Another endpoint with name '{name}' exists of a different class`)
+    assert(not IsServer, `[Network] Invoke cannot be run on the server`)
+
+    local duration: number = tick()
+    local result: any = nil
+    local hasLogged: boolean = false
+    local hasFinished: boolean = false
+    local packed: { any } = {
+        ...,
+    }
+
+    task.spawn(function()
+        result = table.pack(endpoint:InvokeServer(unpack(packed)))
+        hasFinished = true
+    end)
+
+    while not hasFinished do
+        if tick() - duration > 10 and not hasLogged then
+            warn(`[Network::Danger] {name} is taking a long time to return. Args: {unpack(packed)}`)
+            hasLogged = true
+        end
+        task.wait()
+    end
+
+    if hasLogged then
+        warn(string.format("[Stellar::Resolved] '%s' has finished return. Took %.2fs!", name, tick() - duration))
+    end
+
+    return table.unpack(result)
+end
+
+-- Invokes the server with a promise
+function Network:InvokePromise(name: string, ...: any): any
+    local args: { any } = { ... }
+
+    return Promise.new(function(resolve, reject)
+        local success: boolean, result: any = pcall(Network.Invoke, Network, name, unpack(args))
+
+        if success then
+            resolve(result)
+        else
+            reject(result)
+        end
+    end)
 end
 
 --- Sets the function for handling invoke requests
@@ -72,6 +121,15 @@ function Network:OnInvoke(name: string, func: (player: Player, ...any) -> ())
     assert(IsServer, `[Network] SignalAll cannot be run on the client`)
 
     endpoint.OnServerInvoke = func
+end
+
+--- Reserves an endpoint on the server so the client can observe it
+function Network:Reserve(...)
+    for _, data in pairs({
+        ...,
+    }) do
+        Network:GetEndpoint(data[1], data[2])
+    end
 end
 
 --[=[

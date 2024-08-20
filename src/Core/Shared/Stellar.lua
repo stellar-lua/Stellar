@@ -181,4 +181,15 @@ function Stellar.Library(name: string)
     warn(`[Stellar] Package with name {name} not found!`)
 end
 
+--- @deprecated v2 -- Function will not error so existing code still works. Please implement your own solution.
+function Stellar.MarkAsLoaded()
+    warn("[Stellar] MarkAsLoaded is deprecated in Stellar V2")
+end
+
+--- @deprecated v2 -- Function will be called so existing code still works. Please implement your own solution.
+function Stellar.OnLoadingCompletion(func: () -> ())
+    warn("[Stellar] OnLoadingCompletion is deprecated in Stellar V2: Function run now")
+    task.spawn(func)
+end
+
 return Stellar

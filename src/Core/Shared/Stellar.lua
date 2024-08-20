@@ -1,5 +1,5 @@
 --- @class Stellar
---- Game framework (test)
+--- Game framework (BUILD TEST)
 
 local Stellar = {}
 

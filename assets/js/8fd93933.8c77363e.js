@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkdocs=self.webpackChunkdocs||[]).push([[434],{61860:e=>{e.exports=JSON.parse('{"functions":[],"properties":[],"types":[],"name":"Stellar","desc":"Game framework (Test build)","source":{"line":3,"path":"src/Core/Shared/Stellar.lua"}}')}}]);

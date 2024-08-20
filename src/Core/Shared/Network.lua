@@ -124,6 +124,7 @@ function Network:OnInvoke(name: string, func: (player: Player, ...any) -> ())
 end
 
 --- Reserves an endpoint on the server so the client can observe it
+--- @param... {string, string}
 function Network:Reserve(...)
     for _, data in pairs({
         ...,

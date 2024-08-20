@@ -2,8 +2,11 @@
     @class Network
 
     Network handles the creation of RemoteEvents and RemoteFunctions.
+
+    :::caution
     If the client attempts to connect to an endpoint which has not yet been referenced on the server, it will yield for 10 seconds and then drop the request.
     If the server does not reference the endpoint when the server starts, you must "Reserve" it on startup.
+    :::
 ]=]
 
 local Network = {}

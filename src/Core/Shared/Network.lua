@@ -23,11 +23,8 @@ local Translation = {}
 type Endpoint = "RemoteEvent" | "RemoteFunction" | "UnreliableRemoteEvent"
 type Remote = BaseRemoteEvent | RemoteFunction
 
---[=[
-    Observes a RemoteEvent
-    @return Promise
-]=]
-function Network:ObserveSignal(name: string, func: (player: Player, ...any) -> ())
+--- Observes a RemoteEvent
+function Network:ObserveSignal(name: string, func: (player: Player, ...any) -> ()): RBXScriptConnection
     return Promise.try(function()
         return Network:GetEndpoint(name, "RemoteEvent")
     end):andThen(function(endpoint: Remote)

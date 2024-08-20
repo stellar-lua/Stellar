@@ -11,7 +11,7 @@ jobs:
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         version: v0.20.0
-        args: --check src --config-path stylua.toml srcc
+        args: --check src --config-path stylua.toml src
   lint:
     name: Lint
     runs-on: ubuntu-latest

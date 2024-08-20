@@ -1,0 +1,25 @@
+name: Lint and Style
+
+on: push
+
+jobs:
+  style:
+    name: Styling
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: JohnnyMorganz/stylua-action@v3
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        args: --check src --config-path stylua.toml srcc
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: Install Aftman
+      uses: ok-nick/setup-aftman@v0.4.2
+    - name: Lint
+      run: |
+        selene ./src

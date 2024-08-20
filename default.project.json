@@ -1,0 +1,50 @@
+{
+    "name": "Stellar",
+    "tree": {
+        "$className": "DataModel",
+        "$ignoreUnknownInstances": true,
+        "HttpService": {
+            "$className": "HttpService",
+            "$properties": {
+                "HttpEnabled": true
+            }
+        },
+        "ReplicatedStorage": {
+            "$className": "ReplicatedStorage",
+            "ClientModules": {
+                "$className": "Folder",
+                "$path": "src/Core/Client"
+            },
+            "SharedModules": {
+                "$className": "Folder",
+                "$path": "src/Core/Shared"
+            },
+            "Packages": {
+                "$className": "Folder",
+                "$path": "Packages"
+            }
+        },
+        "ServerScriptService": {
+            "$className": "ServerScriptService",
+            "$path": "src/Scripts/Server"
+        },
+        "ServerStorage": {
+            "$className": "ServerStorage",
+            "ServerModules": {
+                "$className": "Folder",
+                "$path": "src/Core/Server"
+            },
+            "Packages": {
+                "$className": "Folder",
+                "$path": "ServerPackages"
+            }
+        },
+        "StarterPlayer": {
+            "$className": "StarterPlayer",
+            "StarterPlayerScripts": {
+                "$className": "StarterPlayerScripts",
+                "$path": "src/Scripts/Client"
+            }
+        }
+    }
+}

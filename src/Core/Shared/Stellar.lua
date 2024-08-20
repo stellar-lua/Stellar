@@ -1,5 +1,8 @@
---- @class Stellar
---- Game framework
+--[=[
+    @class Stellar
+
+    Game Framework
+]=]
 
 local Stellar = {}
 
@@ -49,7 +52,8 @@ function Stellar.Get(name: string, dontInit: boolean?): any
     end
 end
 
---- Retrieves multiple loaded with Stellar by its name. Useful for starting services when the client/server first runs
+--- Retrieves multiple loaded with Stellar by its name.
+--- Useful for starting services when the client/server first runs
 function Stellar.BulkGet(...: string): { ModuleScript }
     local modules: { [number]: ModuleScript } = {}
     local raw: { [number]: string } = { ... }
@@ -163,8 +167,8 @@ function Stellar._Import(module: ModuleScript): (boolean, any)
     end
 end
 
---- Retrieves a wally package by name.
-function Stellar.Library(name: string)
+--- Retrieves a wally package by name
+function Stellar.Library(name: string): any
     if CachedPackages[name] ~= nil then
         return CachedPackages[name]
     end
@@ -186,12 +190,12 @@ function Stellar.Library(name: string)
     warn(`[Stellar] Package with name {name} not found!`)
 end
 
---- @deprecated v2 -- Function will not error so existing code still works. Please implement your own solution.
+--- @deprecated v2 -- Function will not error so existing code still works. Please implement your own solution
 function Stellar.MarkAsLoaded()
     warn("[Stellar] MarkAsLoaded is deprecated in Stellar V2")
 end
 
---- @deprecated v2 -- Function will be called so existing code still works. Please implement your own solution.
+--- @deprecated v2 -- Function will be called so existing code still works. Please implement your own solution
 function Stellar.OnLoadingCompletion(func: () -> ())
     warn("[Stellar] OnLoadingCompletion is deprecated in Stellar V2: Function run now")
     task.spawn(func)

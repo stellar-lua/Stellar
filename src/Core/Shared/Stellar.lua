@@ -7,7 +7,7 @@ local Assets = {}
 local Initialised = {}
 local LoadedAssets = {}
 local CachedPackages = {}
-local PackageLocations = {}
+local PackageLocations = {} --t
 
 function Stellar.Get(name: string, dontInit: boolean?): any
     assert(typeof(name) == "string", `[Stellar] Attempted to get module with type '{typeof(name)}', string expected!`)

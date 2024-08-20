@@ -9,6 +9,7 @@ local LoadedAssets = {}
 local CachedPackages = {}
 local PackageLocations = {}
 
+--- Retrieves a singular file loaded with Stellar by its name
 function Stellar.Get(name: string, dontInit: boolean?): any
     assert(typeof(name) == "string", `[Stellar] Attempted to get module with type '{typeof(name)}', string expected!`)
 
@@ -48,6 +49,7 @@ function Stellar.Get(name: string, dontInit: boolean?): any
     end
 end
 
+--- Retrieves multiple loaded with Stellar by its name. Useful for starting services when the client/server first runs
 function Stellar.BulkGet(...: string): { ModuleScript }
     local modules: { [number]: ModuleScript } = {}
     local raw: { [number]: string } = { ... }
@@ -64,6 +66,7 @@ function Stellar.BulkGet(...: string): { ModuleScript }
     return modules
 end
 
+--- Loads a singular file into Stellar
 function Stellar.Load(module: ModuleScript)
     assert(
         typeof(module) == "Instance" and module:IsA("ModuleScript"),
@@ -75,6 +78,7 @@ function Stellar.Load(module: ModuleScript)
     Assets[module.Name] = module
 end
 
+-- Loads multiple files into Stellar at once
 function Stellar.BulkLoad(...: Folder)
     local function recurseAsset(asset: Instance)
         if asset:IsA("ModuleScript") then
@@ -159,6 +163,7 @@ function Stellar._Import(module: ModuleScript): (boolean, any)
     end
 end
 
+--- Retrieves a wally package by name.
 function Stellar.Library(name: string)
     if CachedPackages[name] ~= nil then
         return CachedPackages[name]

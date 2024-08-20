@@ -65,7 +65,7 @@ function Network:SignalAsync(name: string, ...: any)
 end
 
 --- Invokes the server
---- @error "InvokeClient" -- Invoking the client is not advised or supported with this module
+--- @client
 function Network:Invoke(name: string, ...: any): any
     local endpoint: Remote = Network:GetEndpoint(name, "RemoteFunction")
     assert(endpoint, `[Network] Another endpoint with name '{name}' exists of a different class`)
@@ -99,7 +99,8 @@ function Network:Invoke(name: string, ...: any): any
     return table.unpack(result)
 end
 
--- Invokes the server with a promise
+--- Invokes the server with a promise
+--- @client
 function Network:InvokePromise(name: string, ...: any): any
     local args: { any } = { ... }
 
@@ -115,6 +116,7 @@ function Network:InvokePromise(name: string, ...: any): any
 end
 
 --- Sets the function for handling invoke requests
+--- @server
 function Network:OnInvoke(name: string, func: (player: Player, ...any) -> ())
     local endpoint = Network:GetEndpoint(name, "RemoteFunction")
     assert(endpoint, ("[Network] Another endpoint with name %s exists of a different class."):format(name))

@@ -10,6 +10,7 @@ jobs:
     - uses: JohnnyMorganz/stylua-action@v3
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
+        version: v0.20.0
         args: --check src --config-path stylua.toml srcc
   lint:
     name: Lint

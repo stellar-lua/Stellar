@@ -1,5 +1,4 @@
 name: Lint and Style
-
 on: push
 
 jobs:

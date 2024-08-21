@@ -1,10 +1,14 @@
 gitSourceBranch = "main"
-classOrder = ["Stellar", "Network"]
+classOrder = ["Stellar", "Network", "SoundFX", "Scheduler"]
 
 [docusaurus]
 onBrokenLinks = "throw"
 onBrokenMarkdownLinks = "warn"
 favicon = "/favicon.png"
+
+[home]
+enabled = true
+includeReadme = false
 
 [footer]
 style = "dark"

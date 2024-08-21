@@ -1,1 +1,5 @@
-Coming soon
+---
+sidebar_position: 2
+---
+
+# Getting Started

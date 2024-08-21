@@ -5,6 +5,7 @@ classOrder = ["Stellar", "Network", "SoundFX", "Scheduler"]
 onBrokenLinks = "throw"
 onBrokenMarkdownLinks = "warn"
 favicon = "/favicon.png"
+tagline = "Lightweight and easy to implement framework for Roblox games."
 
 [home]
 enabled = true

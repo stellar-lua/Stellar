@@ -6,7 +6,6 @@ local Network = Stellar.Get("Network")
 
 function ExampleClient:Init()
     local welcomeMessage: string = Network:Invoke("ExampleFunction", "Test Message")
-
     print(welcomeMessage)
 end
 

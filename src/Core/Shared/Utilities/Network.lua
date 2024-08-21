@@ -1,7 +1,6 @@
 --[=[
     @class Network
-
-    Network handles the creation of RemoteEvents and RemoteFunctions.
+    Handles the creation of RemoteEvents and RemoteFunctions.
 
     :::caution
     If the client attempts to connect to an endpoint which has not yet been referenced on the server, it will yield for 10 seconds and then drop the request.

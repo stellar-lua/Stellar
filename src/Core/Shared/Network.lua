@@ -143,7 +143,11 @@ function Network:OnInvoke(name: string, func: (player: Player, ...any) -> ())
     endpoint.OnServerInvoke = func
 end
 
-function Network:Reserve(...)
+--- Used to reserve remotes on the server.
+--- When remotes arent used or listened to on the server, they cannot be created.
+--- By reserving them, they are created so the client can connect to them/
+--- @server
+function Network:Reserve(...: any)
     for _, data in pairs({
         ...,
     }) do

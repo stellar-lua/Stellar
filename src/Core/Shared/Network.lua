@@ -57,6 +57,7 @@ function Network:ObserveSignal(name: string, func: (player: Player, ...any) -> (
 end
 
 --- Signals the server if run on the client, and vice versa
+--- The second argument must be the player to signal if being run on the server
 function Network:Signal(name: string, ...: any)
     local endpoint: Remote = Network:GetEndpoint(name, "RemoteEvent")
     assert(endpoint, `[Network] Another endpoint with name '{name}' exists of a different class`)
@@ -69,6 +70,7 @@ function Network:Signal(name: string, ...: any)
 end
 
 --- Signals all clients
+--- @server
 function Network:SignalAll(name: string, ...: any)
     local endpoint: Remote = Network:GetEndpoint(name, "RemoteEvent")
     assert(endpoint, `[Network] Another endpoint with name '{name}' exists of a different class`)

@@ -4,3 +4,5 @@ Packages
 ServerPackages
 build
 wally.lock
+ExampleClient.lua
+ExampleServer.lua

@@ -6,11 +6,15 @@
 
 local Stellar = {}
 
+local ServerStorage = game:GetService("ServerStorage")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local RunService = game:GetService("RunService")
+
 local Assets = {}
 local Initialised = {}
 local LoadedAssets = {}
 local CachedPackages = {}
-local PackageLocations = {}
+local PackageLocations
 
 --- Retrieves a singular file loaded with Stellar by its name
 function Stellar.Get(name: string, dontInit: boolean?): any
@@ -34,7 +38,7 @@ function Stellar.Get(name: string, dontInit: boolean?): any
         local duration: string = string.format("%.2f", tick() - start)
 
         if tick() - start > 1 then
-            warn(`[Stellar] '{name}' has finished requiring. Took {duration}!`)
+            warn(`[Stellar] '{name}' has finished requiring. Took {duration}s!`)
         end
 
         if success then
@@ -76,10 +80,11 @@ function Stellar.Load(module: ModuleScript)
         typeof(module) == "Instance" and module:IsA("ModuleScript"),
         `[Stellar] Attempted to load a '{typeof(module)}', ModuleScript expected!`
     )
-    assert(module ~= script, "[Stellar] Attempted to load itself!")
     assert(Assets[module.Name] == nil, `[Stellar] Attempted to load duplicate named module '{module.Name}'`)
 
-    Assets[module.Name] = module
+    if module ~= script then
+        Assets[module.Name] = module
+    end
 end
 
 -- Loads multiple files into Stellar at once
@@ -112,7 +117,7 @@ function Stellar._Initialise(name: string, module: any)
         local start: number = tick()
 
         task.spawn(function()
-            success, result = pcall(result.Init, result)
+            success, result = pcall(module.Init, module)
         end)
 
         while success == nil do
@@ -171,6 +176,23 @@ end
 function Stellar.Library(name: string): any
     if CachedPackages[name] ~= nil then
         return CachedPackages[name]
+    end
+
+    if PackageLocations == nil then
+        local packages: Folder? = ReplicatedStorage:FindFirstChild("Packages")
+        PackageLocations = {}
+
+        if packages ~= nil then
+            table.insert(PackageLocations, packages)
+        end
+
+        if RunService:IsServer() then
+            local serverPackages: Folder? = ServerStorage:FindFirstChild("ServerPackages")
+
+            if serverPackages ~= nil then
+                table.insert(serverPackages, serverPackages)
+            end
+        end
     end
 
     for _, location: Folder in PackageLocations do

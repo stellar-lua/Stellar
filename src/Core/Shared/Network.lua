@@ -7,6 +7,24 @@
     If the client attempts to connect to an endpoint which has not yet been referenced on the server, it will yield for 10 seconds and then drop the request.
     If the server does not reference the endpoint when the server starts, you must "Reserve" it on startup.
     :::
+
+    Example Usage:
+    ```lua
+    -- Server
+    local Network = Stellar.Get("Network")
+
+    Network:OnInvoke("ExampleFunction", function(player: Player, message: string)
+        local serverResponse: string = `Hello, {player.Name}! You said: {message}!`
+
+        return serverResponse
+    end)
+
+    -- Client
+    local Network = Stellar.Get("Network")
+
+    local response: string = Network:Invoke("ExampleFunction", "Hello server!")
+    print(response)
+    ```
 ]=]
 
 local Network = {}
@@ -140,10 +158,6 @@ end
 ]=]
 function Network:GetEndpoint(name: string, remote: Endpoint): Remote
     assert(typeof(name) == "string", `[Network] (Arg 1) '{typeof(name)}' passed, string expected!`)
-    assert(
-        typeof(remote) == "Instance" and (remote:IsA("BaseRemoteEvent") or remote:IsA("RemoteFunction")),
-        `[Network] (Arg 2) '{typeof(name)}' passed, Remote expected!`
-    )
 
     if Translation[name] ~= nil then
         return Translation[name]

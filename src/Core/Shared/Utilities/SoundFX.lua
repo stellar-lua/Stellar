@@ -11,6 +11,10 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
 local Sounds = {}
 
+--[[function SoundFX:Play(name: string, part: BasePart?, duplicate: boolean?) end
+
+function SoundFX:GetSound(name: string) end--]]
+
 function SoundFX:Init()
     local soundFolder: Folder? = ReplicatedStorage:FindFirstChild("SoundFXs")
 

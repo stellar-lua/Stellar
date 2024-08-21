@@ -87,7 +87,7 @@ function Stellar.Load(module: ModuleScript)
     end
 end
 
--- Loads multiple files into Stellar at once
+--- Loads multiple files into Stellar at once
 function Stellar.BulkLoad(...: Folder)
     local function recurseAsset(asset: Instance)
         if asset:IsA("ModuleScript") then

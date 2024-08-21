@@ -3,6 +3,7 @@
     Schedule tasks to be run in specified intervals
 
     Example Usage:
+    Respawns the local player every 5 seconds
     ```lua
     local Players = game:GetPlayers("Players")
     local Scheduler = Stellar.Get("Scheduler")

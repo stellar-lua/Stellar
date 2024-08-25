@@ -8,7 +8,7 @@
 Stellar is a lightweight and easy to implement framework for Roblox games. 
 It's designed to be simple, easy to setup and easy to understand for developers of all levels of skill.
 
-Read the [documentation](https://stellar-lua.github.io/Stellar/) for more information.
+Read the [documentation](https://stellar.lxuca.com/) for more information.
 
 # Installation
 

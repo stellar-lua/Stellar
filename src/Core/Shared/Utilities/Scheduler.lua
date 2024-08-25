@@ -29,6 +29,7 @@ local Maid = Stellar.Library("Maid")
 local Signal = Stellar.Library("Signal")
 
 --- Create a new Scheduler object
+--- @diagnostic disable-next-line: undefined-doc-name
 --- @return Scheduler
 function Scheduler.new(loopTime: number)
     local self = setmetatable({

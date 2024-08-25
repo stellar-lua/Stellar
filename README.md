@@ -1,7 +1,6 @@
 ## ⚠️ UNFINISHED, DO NOT USE! ⚠️
 
 <img src=".moonwave/static/banner.png" width="100%"/>
-<!--moonwave-hide-before-this-line-->
 
 # Stellar
 
